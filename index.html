@@ -46,6 +46,8 @@ body {
     margin: auto;
     padding: 45px;
     box-shadow: 0px 0px 30px #dcdcdc;
+   -moz-box-shadow: 0px 0px 30px #dcdcdc;
+   -webkit-box-shadow: 0px 0px 30px #dcdcdc;
 }
 
 .Money {
@@ -57,7 +59,9 @@ body {
 	padding: 20px;
     box-sizing: border-box;
     color: #FFF;
-    box-shadow: 0px 0px 30px rgb(0 127 255 / 30%);
+    box-shadow: 0px 0px 30px rgba(0,127,255,.3);
+    -moz-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
+    -webkit-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -107,17 +111,23 @@ input[type="number"]:focus {
     height: 40px;
     border-radius: 50%;
     position: relative;
-	box-shadow: 0 0 0 1px rgb(255 255 255 / 50%);
+	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	transition: .3s
 }
 
 .mButton:hover {
-	box-shadow: 0 0 0 3px rgb(255 255 255 / 50%)
+	box-shadow: 0 0 0 3px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
 }
 
 
 .mButton:active {
-	box-shadow: 0 0 0 3px rgb(255 255 255 / 100%);
+	box-shadow: 0 0 0 3px rgba(255,255,255,1);
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,1);
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,1);
 	transition: .0s
 }
 
@@ -148,18 +158,24 @@ input[type="text"] {
     font-family: "Montserrat", "Roboto", "Arial", sans-serif;
     font-size: 14px;
 	box-sizing: border-box;
-	box-shadow: 0 0 0 1px rgb(255 255 255 / 50%) inset;
+	box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
+	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
+	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
 	transition: .3s
 }
 input[type="text"]:hover {
-	box-shadow: 0 0 0 3px rgb(255 255 255 / 50%) inset;
+	box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
 }
 input[type="text"]:focus {
     outline: none;
-	box-shadow: 0 0 0 3px rgb(255 255 255 / 100%) inset !important;
+	box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
 }
 input[type="text"]::placeholder {
-	color: rgb(255 255 255 / 50%)
+	color: rgba(255,255,255,.5)
 }
 
 p {
@@ -207,6 +223,8 @@ body {
     max-width: none !important;
     border-radius: 0 !important;
 	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
 	padding: 15px;
 }
 
@@ -271,7 +289,7 @@ let color = 0,
 	colors = [['007dfc','0062c4','0071e2'],['e539e6','fd6712','f14f7e'],['d690fb','975bff','ba78fc'],['e5788f','9758f5','c069c0'],['3f336a','32af91','38727e'],['c465ee','53d9ec','8c9fed'],['f3017b','660eb2','b00896'],['7e83fa','f5c4cd','b4a1e5'],['b0f28d','12bac6','6bd9a6']];
 
 
-setInterval(changeColor, 5000);
+setInterval(changeColor, 15000);
 
 function changeColor() {
   color++;
