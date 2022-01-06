@@ -138,65 +138,14 @@ body {
 }
  }
 </style>
-<script>
-let cash = 100;
 
-function proceed() {
-
-let parsemessage = ' ';
-if (document.getElementById('message').value == '') {
-	parsemessage = "Пожертвование с сайта"
-} else {
-	parsemessage = document.getElementById('message').value
-}
-
-location.href='https://money.yandex.ru/quickpay/confirm.xml?receiver=4100115237529766&quickpay-form=shop&targets='+parsemessage+'&label=Donate&sum='+cash+'&successURL=https%3A%2F%2Fnod365.github.io%2Fdonate%2Fthanks.html&paymentType=AC'
-
-
-}
-
-function cashud(d) {
-	cash = parseInt(document.getElementById('howMuch').value);
-	if (d) {
-		let step;
-		if (cash < 100) {step = 10} else if (cash < 300 ) {step = 50} else if (cash < 1500) {step = 100} else if (cash < 3000) {step = 500} else {step = 1000}
-		cash = cash + step
-	} else {
-		let step;
-		if (cash <= 100) {step = 10} else if (cash <= 300 ) {step = 50} else if (cash <= 1500) {step = 100} else if (cash <= 3000) {step = 500} else {step = 1000}
-		cash = cash - step
-	}
-	document.getElementById('howMuch').value = cash;
-	normalize();
-}
-
-function normalize() {
-	cash = parseInt(document.getElementById('howMuch').value);
-	if (cash > 15000) {cash = 15000}
-	if (cash < 10) {cash = 10}
-	document.getElementById('howMuch').value = cash;
-	//alert(cash);
-}
-
-document.addEventListener ("change", normalize, document.getElementById('howMuch'));
-
-</script>
 </head>
 <body>
 	<div class="wrap">
 		<div class="Hello">
-		<h1>Оставить <span style="color:#007dfb">курьеру</span> чаевые.</h1>
-		<p>Еще не передумали? Тогда ниже расположена форма, которая направит Вас на страницу оплаты через ЮMoney. Укажите сумму и нажмите Оплатить.</p>
+		<h1>Спасибо <span style="color:#007dfb">Вам</span> за чаевые.</h1>
+		<p>Благодарю Вас за то, что Вы приблизили меня к мечте.</p>
 		</div>
-		<div class="Money">
-				<div class="mText">Выберите сумму:</div>
-				<div class="mWrap">  <div class="mButton" onclick="cashud(0)"> </div> <input class="cash" id="howMuch" value="100" ></input> <div class="mButton mPlus" onclick="cashud(1)"> </div></div>
-				<div class="mText">Комментарий: <span style="opacity: .6; font-size: 10px">(Необязательно)</span></div>
-				<input name="messtext" type=text id="message"></input>
-				<button class="send" id="send" onclick="proceed()" type="button">Оплатить</button>
-		</div>
-		
-		<p class="disclaimer">Сайт не хранит данные карт и их владельцев, оплата производится через ЮMoney (Яндекс Деньги).</p>
 		
 	</div>
 </body>
