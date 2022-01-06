@@ -3,10 +3,38 @@
 <html>
 <head>
 <title>Пожертвование</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+
+#who, #send {
+	transition: color 1s !important
+}
+#Money {
+	transition: box-shadow 1s !important;
+    position: relative;
+    overflow: hidden;
+	z-index: 1;
+}
+#colorTrick {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #transparent;
+	opacity: 0;
+	pointer-events: none;
+    z-index: -1;
+	transition: opacity 1s !important
+	
+}
+
 body {
-    background: #f0f0f0;
+	margin: 25px;
+    background: #FeFeFe;
 	font-family: "Montserrat", "Roboto", "Arial", sans-serif;
 }
 .wrap {
@@ -14,9 +42,12 @@ body {
     max-width: 300px;
     background: #FFF;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 30px;
     margin: auto;
-	padding: 15px;
+    padding: 45px;
+    box-shadow: 0px 0px 30px #dcdcdc;
+   -moz-box-shadow: 0px 0px 30px #dcdcdc;
+   -webkit-box-shadow: 0px 0px 30px #dcdcdc;
 }
 
 .Money {
@@ -24,11 +55,13 @@ body {
     min-height: 220px;
     background: rgb(0, 127, 255);
     background: linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);
-    box-shadow: rgb(0 0 0 / 10%) 0px 20px 25px, rgb(0 0 0 / 4%) 0px 10px 10px;
-    border-radius: 10px;
+    border-radius: 20px;
 	padding: 20px;
     box-sizing: border-box;
     color: #FFF;
+    box-shadow: 0px 0px 30px rgba(0,127,255,.3);
+    -moz-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
+    -webkit-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -47,31 +80,61 @@ input[type="number"]:focus {
     justify-content: center;
 }
 .mButton:after {
-    content: "-";
+    content: "";
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    width: 50%;
+    left: 25%;
+    height: 1px;
     text-align: center;
     font-size: 32px;
-	font-weight: 100;
+    font-weight: 100;
     font-family: monospace;
+    background: #FFF;
 }
-.mButton.mPlus:after {
-    content: "+" !important;
+
+.mButton.mPlus:before {
+	content: "";
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    top: 25%;
+    height: 50%;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 100;
+    font-family: monospace;
+    background: #FFF;
 }
 .mButton {
     width: 40px;
     height: 40px;
-    border: 3px solid #FFF;
     border-radius: 50%;
-	position: relative;
+    position: relative;
+	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	transition: .3s
 }
+
+.mButton:hover {
+	box-shadow: 0 0 0 3px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
+}
+
+
+.mButton:active {
+	box-shadow: 0 0 0 3px rgba(255,255,255,1);
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,1);
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,1);
+	transition: .0s
+}
+
 input.cash {
     background: none;
     border: none;
-    text-align: right;
+    text-align: center;
     width: 77px;
     padding: 0 10px;
     color: #FFF;
@@ -87,25 +150,44 @@ input.cash:focus {
 input[type="text"] {
     width: 100%;
     padding: 10px;
-    border: 3px solid #FFF;
-    border-radius: 6px;
+    border: none;
+    border-radius: 10px;
     margin: 20px 0px;
     background: transparent;
     color: #FFF;
     font-family: "Montserrat", "Roboto", "Arial", sans-serif;
     font-size: 14px;
 	box-sizing: border-box;
-	transition: .3s border
+	box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
+	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
+	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
+	transition: .3s
+}
+input[type="text"]:hover {
+	box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
 }
 input[type="text"]:focus {
-    border: 3px solid #ccf;
     outline: none;
+	box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
+	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
+	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
 }
+input[type="text"]::placeholder {
+	color: rgba(255,255,255,.5)
+}
+
+p {
+    padding: 20px 0;
+}
+
 p.disclaimer {
     padding: 0;
     margin: 0;
     padding-top: 20px;
-    color: #999;
+    color: #bbb;
+    font-weight: 100;
 }
 
 button.send {
@@ -116,13 +198,18 @@ button.send {
     font-family: "Montserrat", "Roboto", "Arial", sans-serif;
     font-size: 14px;
     box-sizing: border-box;
-    border-radius: 6px;
+    border-radius: 10px;
     width: 100%;
 	cursor: pointer;
 }
 h1 {
     margin: 0;
     font-size: 32px;
+}
+
+.descSpan {
+opacity: .6; 
+font-size: 10px
 }
 
 @media (max-width: 400px) { 
@@ -135,17 +222,34 @@ body {
     margin: 0 !important;
     max-width: none !important;
     border-radius: 0 !important;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	padding: 15px;
 }
- }
+
+h1 {
+    font-size: 9vw;
+}
+p {
+    font-size: 4.5vw;
+    padding: 2vw 0;
+}
+
+
+}
+
 </style>
 
 </head>
 <body>
 	<div class="wrap">
 		<div class="Hello">
-		<h1>Спасибо <span style="color:#007dfb">Вам</span> за чаевые.</h1>
-		<p>Благодарю Вас за то, что Вы приблизили меня к мечте.</p>
+		<h1>Спасибо  <span id="who" style="color:#007dfb">Вам</span> за чаевые.</h1>
+		<p>С миру по нитке... Благодаря Вам, я стал немного ближе к своей цели.</p>
 		</div>
+		
+		
 		
 	</div>
 </body>
