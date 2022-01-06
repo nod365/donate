@@ -7,9 +7,34 @@
 
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&display=swap');
+
+#who, #send {
+	transition: color 1s !important
+}
+#Money {
+	transition: box-shadow 1s !important;
+    position: relative;
+    overflow: hidden;
+	z-index: 1;
+}
+#colorTrick {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: #transparent;
+	opacity: 0;
+	pointer-events: none;
+    z-index: -1;
+	transition: opacity 1s !important
+	
+}
+
 body {
-    background: #FFF;
+	margin: 25px;
+    background: #FeFeFe;
 	font-family: "Montserrat", "Roboto", "Arial", sans-serif;
 }
 .wrap {
@@ -17,9 +42,10 @@ body {
     max-width: 300px;
     background: #FFF;
     overflow: hidden;
-    border-radius: 10px;
+    border-radius: 30px;
     margin: auto;
-	padding: 15px;
+    padding: 45px;
+    box-shadow: 0px 0px 30px #dcdcdc;
 }
 
 .Money {
@@ -27,11 +53,11 @@ body {
     min-height: 220px;
     background: rgb(0, 127, 255);
     background: linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);
-    box-shadow: rgb(0 0 0 / 10%) 0px 20px 25px, rgb(0 0 0 / 4%) 0px 10px 10px;
-    border-radius: 10px;
+    border-radius: 20px;
 	padding: 20px;
     box-sizing: border-box;
     color: #FFF;
+    box-shadow: 0px 0px 30px rgb(0 127 255 / 30%);
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -50,31 +76,55 @@ input[type="number"]:focus {
     justify-content: center;
 }
 .mButton:after {
-    content: "-";
+    content: "";
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    width: 50%;
+    left: 25%;
+    height: 1px;
     text-align: center;
     font-size: 32px;
-	font-weight: 100;
+    font-weight: 100;
     font-family: monospace;
+    background: #FFF;
 }
-.mButton.mPlus:after {
-    content: "+" !important;
+
+.mButton.mPlus:before {
+	content: "";
+    position: absolute;
+    left: 50%;
+    width: 1px;
+    top: 25%;
+    height: 50%;
+    text-align: center;
+    font-size: 32px;
+    font-weight: 100;
+    font-family: monospace;
+    background: #FFF;
 }
 .mButton {
     width: 40px;
     height: 40px;
-    border: 3px solid #FFF;
     border-radius: 50%;
-	position: relative;
+    position: relative;
+	box-shadow: 0 0 0 1px rgb(255 255 255 / 50%);
+	transition: .3s
 }
+
+.mButton:hover {
+	box-shadow: 0 0 0 3px rgb(255 255 255 / 50%)
+}
+
+
+.mButton:active {
+	box-shadow: 0 0 0 3px rgb(255 255 255 / 100%);
+	transition: .0s
+}
+
 input.cash {
     background: none;
     border: none;
-    text-align: right;
+    text-align: center;
     width: 77px;
     padding: 0 10px;
     color: #FFF;
@@ -90,25 +140,38 @@ input.cash:focus {
 input[type="text"] {
     width: 100%;
     padding: 10px;
-    border: 3px solid #FFF;
-    border-radius: 6px;
+    border: none;
+    border-radius: 10px;
     margin: 20px 0px;
     background: transparent;
     color: #FFF;
     font-family: "Montserrat", "Roboto", "Arial", sans-serif;
     font-size: 14px;
 	box-sizing: border-box;
-	transition: .3s border
+	box-shadow: 0 0 0 1px rgb(255 255 255 / 50%) inset;
+	transition: .3s
+}
+input[type="text"]:hover {
+	box-shadow: 0 0 0 3px rgb(255 255 255 / 50%) inset;
 }
 input[type="text"]:focus {
-    border: 3px solid #ccf;
     outline: none;
+	box-shadow: 0 0 0 3px rgb(255 255 255 / 100%) inset !important;
 }
+input[type="text"]::placeholder {
+	color: rgb(255 255 255 / 50%)
+}
+
+p {
+    padding: 20px 0;
+}
+
 p.disclaimer {
     padding: 0;
     margin: 0;
     padding-top: 20px;
-    color: #999;
+    color: #bbb;
+    font-weight: 100;
 }
 
 button.send {
@@ -119,13 +182,18 @@ button.send {
     font-family: "Montserrat", "Roboto", "Arial", sans-serif;
     font-size: 14px;
     box-sizing: border-box;
-    border-radius: 6px;
+    border-radius: 10px;
     width: 100%;
 	cursor: pointer;
 }
 h1 {
     margin: 0;
     font-size: 32px;
+}
+
+.descSpan {
+opacity: .6; 
+font-size: 10px
 }
 
 @media (max-width: 400px) { 
@@ -138,8 +206,21 @@ body {
     margin: 0 !important;
     max-width: none !important;
     border-radius: 0 !important;
+	box-shadow: none;
+	padding: 15px;
 }
- }
+
+h1 {
+    font-size: 9vw;
+}
+p {
+    font-size: 4.5vw;
+    padding: 2vw 0;
+}
+
+
+}
+
 </style>
 <script>
 let cash = 100;
@@ -174,32 +255,65 @@ function cashud(d) {
 }
 
 function normalize() {
+	if (document.getElementById('howMuch').value == '') {
+		document.getElementById('howMuch').value = '0'
+	}
 	cash = parseInt(document.getElementById('howMuch').value);
+	
 	if (cash > 15000) {cash = 15000}
 	if (cash < 10) {cash = 10}
 	document.getElementById('howMuch').value = cash;
-	//alert(cash);
 }
 
 document.addEventListener ("change", normalize, document.getElementById('howMuch'));
+
+let color = 0,
+	colors = [['007dfc','0062c4','0071e2'],['e539e6','fd6712','f14f7e'],['d690fb','975bff','ba78fc'],['e5788f','9758f5','c069c0'],['3f336a','32af91','38727e'],['c465ee','53d9ec','8c9fed'],['f3017b','660eb2','b00896'],['7e83fa','f5c4cd','b4a1e5'],['b0f28d','12bac6','6bd9a6']];
+
+
+setInterval(changeColor, 5000);
+
+function changeColor() {
+  color++;
+  if (color>=9) {color = 0}
+  document.getElementById('who').style.color = '#'+colors[color][0];
+  document.getElementById('send').style.color = '#'+colors[color][2];
+  
+  document.getElementById('Money').style.boxShadow = '0px 0px 40px -10px #'+colors[color][2]
+  
+  document.getElementById('colorTrick').style.background = 'linear-gradient(to right bottom, #'+colors[color][0]+', #'+colors[color][1]+' 120%) '
+
+  document.getElementById('colorTrick').style.opacity = '1'
+  
+  setTimeout(function() { 
+	document.getElementById('colorTrick').style.opacity = '0'
+	document.getElementById('Money').style.background = 'linear-gradient(to right bottom, #'+colors[color][0]+', #'+colors[color][1]+' 120%) '
+  }, 1200);
+  
+
+}
+
 
 </script>
 </head>
 <body>
 	<div class="wrap">
 		<div class="Hello">
-		<h1>Оставить <span style="color:#007dfb">курьеру</span> чаевые.</h1>
-		<p>Еще не передумали? Тогда ниже расположена форма, которая направит Вас на страницу оплаты через ЮMoney. Укажите сумму и нажмите Оплатить.</p>
+		<h1>Пожертвовать <span id="who" style="color:#007dfb">курьеру</span> чаевые.</h1>
+		<p>Еще не передумали? Тогда ниже расположена форма, которая направит Вас на страницу оплаты через ЮMoney. Укажите сумму и нажмите Перевести.</p>
 		</div>
-		<div class="Money">
-				<div class="mText">Выберите сумму:</div>
-				<div class="mWrap">  <div class="mButton" onclick="cashud(0)"> </div> <input class="cash" id="howMuch" value="100" ></input> <div class="mButton mPlus" onclick="cashud(1)"> </div></div>
-				<div class="mText">Комментарий: <span style="opacity: .6; font-size: 10px">(Необязательно)</span></div>
-				<input name="messtext" type=text id="message"></input>
-				<button class="send" id="send" onclick="proceed()" type="button">Оплатить</button>
+		<div class="Money" id="Money">
+				<div id="colorTrick"> </div>
+				<div class="mText">Выберите сумму: <span class="descSpan">до 15 000 руб.</span></div>
+				<div class="mWrap">  <div class="mButton" onclick="cashud(0)"> </div> <input class="cash" id="howMuch" value="100" type="number"></input> <div class="mButton mPlus" onclick="cashud(1)"> </div></div>
+				<div class="mText">Комментарий: <span class="descSpan">Опционально</span></div>
+				<input name="messtext" type=text id="message" placeholder="Напишите что-нибудь...">
+				
+				<button class="send" id="send" onclick="proceed()" type="button">Перевести</button>
 		</div>
 		
 		<p class="disclaimer">Сайт не хранит данные карт и их владельцев, оплата производится через ЮMoney (Яндекс Деньги).</p>
+		
 		
 	</div>
 </body>
