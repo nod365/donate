@@ -120,7 +120,7 @@ input[type="number"]:focus {
 	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
-	transition: .3s
+	transition: .3s box-shadow;
 }
 
 
@@ -163,7 +163,7 @@ input[type="text"] {
 	box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
 	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
 	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
-	transition: .3s
+	transition: .3s box-shadow
 }
 
 
@@ -221,7 +221,7 @@ font-size: 10px
 	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
-	transition: .3s;
+	transition: .3s box-shadow;
     border-radius: 10px;
     margin: 10px auto;
 }
@@ -265,7 +265,7 @@ font-size: 10px
     position: relative;
 }
 
-@media (max-width: 400px) { 
+@media (max-width: 430px) { 
 body {
  margin: 0 !important;
  
@@ -284,11 +284,40 @@ body {
 h1 {
     font-size: 9vw;
 }
+
+
 p {
     font-size: 4.5vw;
     padding: 2vw 0;
 }
 
+div#Money {
+    border-radius: 6vw;
+}
+
+input#message, button.send, .amountsWrap>div {
+    border-radius: 3vw;
+}
+
+div#Money {
+    padding: 5vw;
+}
+
+button#send, input[type="text"], .mText, .amountsWrap>div {
+    font-size: 4vw;
+}
+input[type="text"] {
+margin: 6vw 0px;
+}
+
+.amountsWrap {
+
+    padding-bottom: 3vw;
+}
+
+.amountsWrap>div {
+    padding: 2vw 4vw;
+}
 
 }
 
@@ -391,7 +420,7 @@ function changeColor() {
 <body onload="changeColor()">
 	<div class="wrap">
 		<div class="Hello">
-		<h1>Пожертвовать <span id="who" style="color:#222">курьеру</span> <div class="teaTime"><div id="noTea"></div>на чай.</div> На машину.</h1>
+		<h1>Пожертвовать <span id="who" style="color:#222">курьеру</span> <div class="teaTime"><div id="noTea"></div>на чай.</div> На машину.</h1>
 		<p>Ещё не передумали? Тогда ниже расположена форма, которая направит Вас на страницу оплаты через ЮMoney. Укажите сумму и нажмите Перевести.</p>
 		
 		</div>
