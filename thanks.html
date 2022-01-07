@@ -12,11 +12,17 @@
 #who, #send {
 	transition: color 1s !important
 }
+
+#noTea {
+	transition: background 1s !important
+}
+
 #Money {
 	transition: box-shadow 1s !important;
     position: relative;
     overflow: hidden;
 	z-index: 1;
+	margin: 36px 0 20px 0px;
 }
 #colorTrick {
     position: absolute;
@@ -52,16 +58,15 @@ body {
 
 .Money {
     width: 100%;
-    min-height: 220px;
     background: rgb(0, 127, 255);
-    background: linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);
+    background: linear-gradient(to right bottom, #444, #222 120%);
     border-radius: 20px;
 	padding: 20px;
     box-sizing: border-box;
     color: #FFF;
-    box-shadow: 0px 0px 30px rgba(0,127,255,.3);
-    -moz-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
-    -webkit-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
+    box-shadow: 0px 0px 30px rgba(0,0,0,.3);
+    -moz-box-shadow: 0px 0px 30px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,.3);
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -114,17 +119,13 @@ input[type="number"]:focus {
 	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
 	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
-	transition: .3s
-}
-
-.mButton:hover {
-	box-shadow: 0 0 0 3px rgba(255,255,255,.5);
-	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
-	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
+	transition: .3s box-shadow;
 }
 
 
-.mButton:active {
+
+
+.mButton:active, .amountsWrap>div:active {
 	box-shadow: 0 0 0 3px rgba(255,255,255,1);
 	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,1);
 	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,1);
@@ -161,13 +162,10 @@ input[type="text"] {
 	box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
 	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
 	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
-	transition: .3s
+	transition: .3s box-shadow
 }
-input[type="text"]:hover {
-	box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
-	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
-	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
-}
+
+
 input[type="text"]:focus {
     outline: none;
 	box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
@@ -178,7 +176,7 @@ input[type="text"]::placeholder {
 	color: rgba(255,255,255,.5)
 }
 
-p {
+.Money p {
     padding: 20px 0;
 }
 
@@ -191,7 +189,7 @@ p.disclaimer {
 }
 
 button.send {
-    color: #006ad4;
+    color: #222;
     background: #FFF;
     border: none;
     padding: 10px;
@@ -212,7 +210,61 @@ opacity: .6;
 font-size: 10px
 }
 
-@media (max-width: 400px) { 
+.amountsWrap {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.amountsWrap>div {
+    padding: 5px 10px;
+	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	transition: .3s box-shadow;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.amountsWrap>div:first-child {
+    margin-left: 0 !important;
+}
+
+.amountsWrap>div:last-child {
+    margin-right: 0 !important;
+}
+
+#am0:after {
+	content: '100';
+}
+
+#am1:after {
+	content: '300';
+}
+
+#am2:after {
+	content: '500';
+}
+
+#am3:after {
+	content: '1000';
+}
+
+#noTea {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 3px;
+    background: #222;
+    left: 0;
+    top: 50%;
+}
+
+.teaTime {
+    display: inline-block;
+    position: relative;
+}
+
+@media (max-width: 430px) { 
 body {
  margin: 0 !important;
  
@@ -225,32 +277,84 @@ body {
 	box-shadow: none;
 	-moz-box-shadow: none;
 	-webkit-box-shadow: none;
-	padding: 15px;
+	padding: 5vw;
 }
-
+.mWrap {
+	padding: 6vw 0;
+}
 h1 {
     font-size: 9vw;
-}
-p {
-    font-size: 4.5vw;
-    padding: 2vw 0;
+    margin: 5vw 0;
 }
 
+
+p {
+    font-size: 4.5vw;
+    padding: 3vw 0 !important;
+}
+
+input#message, button.send, .amountsWrap>div {
+    border-radius: 3vw;
+}
+
+div#Money {
+    padding: 5vw;
+	margin: 9vw 0 6vw 0px;
+	border-radius: 6vw;
+}
+
+button#send, input[type="text"],  .amountsWrap>div {
+    font-size: 4vw;
+	padding: 3vw;
+}
+
+
+
+.mText {
+    font-size: 5vw;
+}
+
+.descSpan {
+    font-size: 3vw;
+}
+
+.mButton {
+    width: 12vw;
+    height: 12vw;
+}
+
+input#howMuch {
+    width: 24vw;
+    font-size: 7vw;
+    margin: 0;
+    padding: 0 1vw;
+}
+
+input[type="text"] {
+margin: 6vw 0px;
+}
+
+.amountsWrap {
+
+    padding-bottom: 3vw;
+}
+
+.amountsWrap>div {
+    padding: 2vw 4vw;
+}
 
 }
 
 </style>
 
 </head>
-<body>
+<body onload="changeColor()">
 	<div class="wrap">
 		<div class="Hello">
-		<h1>Спасибо  <span id="who" style="color:#007dfb">Вам</span> за чаевые.</h1>
-		<p>С миру по нитке... Благодаря Вам, я стал немного ближе к своей цели.</p>
-		</div>
-		
-		
+		<h1>С миру по нитке <span id="who" style="color:#007dfc"> голому рубаха</span>.</h1>
+		<p>Спасибо за Ваш донат. Я безмерно благодарен Вам, какую бы сумму вы не пожертвовали, а также уверяю, что ни копейка из Ваших денег не пропадёт даром.</p>
 		
 	</div>
+	
 </body>
 </html>
