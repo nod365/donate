@@ -12,11 +12,17 @@
 #who, #send {
 	transition: color 1s !important
 }
+
+#noTea {
+	transition: background 1s !important
+}
+
 #Money {
 	transition: box-shadow 1s !important;
     position: relative;
     overflow: hidden;
 	z-index: 1;
+	margin: 36px 0 20px 0px;
 }
 #colorTrick {
     position: absolute;
@@ -54,14 +60,14 @@ body {
     width: 100%;
     min-height: 220px;
     background: rgb(0, 127, 255);
-    background: linear-gradient(to right bottom, rgb(0, 127, 255), rgb(0, 89, 178) 120%);
+    background: linear-gradient(to right bottom, #444, #222 120%);
     border-radius: 20px;
 	padding: 20px;
     box-sizing: border-box;
     color: #FFF;
-    box-shadow: 0px 0px 30px rgba(0,127,255,.3);
-    -moz-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
-    -webkit-box-shadow: 0px 0px 30px rgba(0,127,255,.3);
+    box-shadow: 0px 0px 30px rgba(0,0,0,.3);
+    -moz-box-shadow: 0px 0px 30px rgba(0,0,0,.3);
+    -webkit-box-shadow: 0px 0px 30px rgba(0,0,0,.3);
 }
 input[type="number"]::-webkit-outer-spin-button,
 input[type="number"]::-webkit-inner-spin-button {
@@ -117,14 +123,10 @@ input[type="number"]:focus {
 	transition: .3s
 }
 
-.mButton:hover {
-	box-shadow: 0 0 0 3px rgba(255,255,255,.5);
-	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
-	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5);
-}
 
 
-.mButton:active {
+
+.mButton:active, .amountsWrap>div:active {
 	box-shadow: 0 0 0 3px rgba(255,255,255,1);
 	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,1);
 	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,1);
@@ -163,11 +165,8 @@ input[type="text"] {
 	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5) inset;
 	transition: .3s
 }
-input[type="text"]:hover {
-	box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
-	-moz-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
-	-webkit-box-shadow: 0 0 0 3px rgba(255,255,255,.5) inset;
-}
+
+
 input[type="text"]:focus {
     outline: none;
 	box-shadow: 0 0 0 3px rgba(255,255,255,1) inset !important;
@@ -178,7 +177,7 @@ input[type="text"]::placeholder {
 	color: rgba(255,255,255,.5)
 }
 
-p {
+.Money p {
     padding: 20px 0;
 }
 
@@ -191,7 +190,7 @@ p.disclaimer {
 }
 
 button.send {
-    color: #006ad4;
+    color: #222;
     background: #FFF;
     border: none;
     padding: 10px;
@@ -210,6 +209,60 @@ h1 {
 .descSpan {
 opacity: .6; 
 font-size: 10px
+}
+
+.amountsWrap {
+    display: flex;
+    padding-bottom: 10px;
+}
+
+.amountsWrap>div {
+    padding: 5px 10px;
+	box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-moz-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	-webkit-box-shadow: 0 0 0 1px rgba(255,255,255,.5);
+	transition: .3s;
+    border-radius: 10px;
+    margin: 10px auto;
+}
+
+.amountsWrap>div:first-child {
+    margin-left: 0 !important;
+}
+
+.amountsWrap>div:last-child {
+    margin-right: 0 !important;
+}
+
+#am0:after {
+	content: '100';
+}
+
+#am1:after {
+	content: '300';
+}
+
+#am2:after {
+	content: '500';
+}
+
+#am3:after {
+	content: '1000';
+}
+
+#noTea {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 3px;
+    background: #222;
+    left: 0;
+    top: 50%;
+}
+
+.teaTime {
+    display: inline-block;
+    position: relative;
 }
 
 @media (max-width: 400px) { 
@@ -272,6 +325,15 @@ function cashud(d) {
 	normalize();
 }
 
+function smartButton(am) {
+	if (isNaN(am)) {
+		return false;
+	} else {
+		document.getElementById('howMuch').value = am;
+		normalize();
+	}
+}
+
 function normalize() {
 	if (document.getElementById('howMuch').value == '') {
 		document.getElementById('howMuch').value = '0'
@@ -280,59 +342,74 @@ function normalize() {
 	
 	if (cash > 15000) {cash = 15000}
 	if (cash < 10) {cash = 10}
+	
+	if (cash == 15000) {
+		document.getElementById('aDown').style.opacity = 1;
+		document.getElementById('aUp').style.opacity = 0;
+	} else if (cash == 10) {
+		document.getElementById('aDown').style.opacity = 0;
+		document.getElementById('aUp').style.opacity = 1;
+	} else {
+		document.getElementById('aDown').style.opacity = 1;
+		document.getElementById('aUp').style.opacity = 1;
+	}
 	document.getElementById('howMuch').value = cash;
 }
 
 document.addEventListener ("change", normalize, document.getElementById('howMuch'));
 
 let color = 0,
-	colors = [['007dfc','0062c4','0071e2'],['e539e6','fd6712','f14f7e'],['d690fb','975bff','ba78fc'],['e5788f','9758f5','c069c0'],['3f336a','32af91','38727e'],['c465ee','53d9ec','8c9fed'],['f3017b','660eb2','b00896'],['7e83fa','f5c4cd','b4a1e5'],['b0f28d','12bac6','6bd9a6']];
+	colors = [['007dfc','0062c4','0071e2'],['e539e6','fd6712','f14f7e'],['d690fb','975bff','ba78fc'],['32af91','7a60d7','508eae'],['c465ee','53d9ec','8c9fed'],['f3017b','660eb2','b00896'],['7e83fa','f5c4cd','b4a1e5'],['12bac6','b0f28d','6bd9a6']];
 
 
-setInterval(changeColor, 15000);
+setInterval(changeColor, 11999);
 
 function changeColor() {
-  color++;
-  if (color>=9) {color = 0}
-  document.getElementById('who').style.color = '#'+colors[color][0];
-  document.getElementById('send').style.color = '#'+colors[color][2];
-  
-  document.getElementById('Money').style.boxShadow = '0px 0px 40px -10px #'+colors[color][2]
-  
-  document.getElementById('colorTrick').style.background = 'linear-gradient(to right bottom, #'+colors[color][0]+', #'+colors[color][1]+' 120%) '
-
-  document.getElementById('colorTrick').style.opacity = '1'
-  
-  setTimeout(function() { 
-	document.getElementById('colorTrick').style.opacity = '0'
-	document.getElementById('Money').style.background = 'linear-gradient(to right bottom, #'+colors[color][0]+', #'+colors[color][1]+' 120%) '
-  }, 1200);
-  
-
+//  color++;
+//  if (color>=9) {color = 0}
+	
+	color = Math.round(Math.random()*7);
+	console.log(color)
+	document.getElementById('who').style.color = '#'+colors[color][0];
+	
+	document.getElementById('noTea').style.background = '#'+colors[color][0];
+	
+	document.getElementById('send').style.color = '#'+colors[color][2];
+	
+	document.getElementById('Money').style.boxShadow = '0px 0px 40px -10px #'+colors[color][2]
+	document.getElementById('colorTrick').style.background = 'linear-gradient(to right bottom, #'+colors[color][0]+', #'+colors[color][1]+' 120%) '
+	document.getElementById('colorTrick').style.opacity = '1'  
+	setTimeout(function() { 
+		document.getElementById('colorTrick').style.opacity = '0'
+		document.getElementById('Money').style.background = 'linear-gradient(to right bottom, #'+colors[color][0]+', #'+colors[color][1]+' 120%) '
+	}, 1200);
 }
 
 
 </script>
 </head>
-<body>
+<body onload="changeColor()">
 	<div class="wrap">
 		<div class="Hello">
-		<h1>Пожертвовать <span id="who" style="color:#007dfb">курьеру</span> чаевые.</h1>
-		<p>Еще не передумали? Тогда ниже расположена форма, которая направит Вас на страницу оплаты через ЮMoney. Укажите сумму и нажмите Перевести.</p>
+		<h1>Пожертвовать <span id="who" style="color:#222">курьеру</span> <div class="teaTime"><div id="noTea"></div>на чай.</div> На машину.</h1>
+		<p>Ещё не передумали? Тогда ниже расположена форма, которая направит Вас на страницу оплаты через ЮMoney. Укажите сумму и нажмите Перевести.</p>
+		
 		</div>
 		<div class="Money" id="Money">
 				<div id="colorTrick"> </div>
 				<div class="mText">Выберите сумму: <span class="descSpan">до 15 000 руб.</span></div>
-				<div class="mWrap">  <div class="mButton" onclick="cashud(0)"> </div> <input class="cash" id="howMuch" value="100" type="number"></input> <div class="mButton mPlus" onclick="cashud(1)"> </div></div>
+				<div class="mWrap">  <div id="aDown" class="mButton" onclick="cashud(0)"> </div> <input class="cash" id="howMuch" value="100" type="number"></input> <div id="aUp" class="mButton mPlus" onclick="cashud(1)"> </div></div>
+				<div class="amountsWrap"><div id="am0" onclick="smartButton(100)"></div><div id="am1" onclick="smartButton(300)"></div><div id="am2" onclick="smartButton(500)"></div><div id="am3" onclick="smartButton(1000)"></div></div>
 				<div class="mText">Комментарий: <span class="descSpan">Опционально</span></div>
 				<input name="messtext" type=text id="message" placeholder="Напишите что-нибудь...">
 				
 				<button class="send" id="send" onclick="proceed()" type="button">Перевести</button>
 		</div>
 		
-		<p class="disclaimer">Сайт не хранит данные карт и их владельцев, оплата производится через ЮMoney (Яндекс Деньги).</p>
-		
+		<p class="disclaimer">Сайт не хранит данные банковских карт и их владельцев. Оплата производится через ЮMoney (Яндекс Деньги).</p>
+		<p class="disclaimer">Детям в будущем буду говорить: «Да я в ваши годы работал в доставке по 15 часов без выходных и клянчил деньги на машину самодельными визитками, что вы знаете о жизни?»</p>
 		
 	</div>
+	
 </body>
 </html>
