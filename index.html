@@ -577,7 +577,7 @@ function calculate() {
 	document.getElementById('cur').innerHTML = calccash
 	document.getElementById('updateinfo').innerHTML = 'Информация обновлена '+history[history.length-1][0]
 	document.getElementById('updateinfo2').innerHTML = (history.length+1)+' донатов за '+days+' дней.'
-	document.getElementById('progressIn').style.width = (100/120000*calccash)+'%'
+	document.getElementById('progressIn').style.width = (100/10000*calccash)+'%'
 }
 
 let opened = 0
